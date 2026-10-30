@@ -132,6 +132,175 @@ button:disabled{ opacity:.4; cursor:not-allowed; box-shadow:none; }
   padding:10px 12px; background:var(--bg); border-radius:10px; border:1px solid var(--border); overflow-wrap:anywhere;
 }
 .qrows li .idx{ color:var(--accent-dark); font-weight:700; flex-shrink:0; }
+/* =========================================
+   手機橫式：卡片改成 16:9
+   ========================================= */
+
+@media screen and (orientation: landscape) and (max-width: 900px){
+
+  /* 讓橫向時卡片可以利用螢幕寬度 */
+  .view{
+    max-width: none;
+    width: 100%;
+  }
+
+  .book-wrap{
+    width: min(86vw, 700px);
+    padding-bottom: 24px;
+  }
+
+  /* 16:9 橫式卡片 */
+  .book{
+    width: min(86vw, 640px);
+    height: calc(min(86vw, 640px) * 9 / 16);
+    max-height: 72vh;
+  }
+
+  .face{
+    border-radius: 18px;
+  }
+
+  /* 正面 */
+  .front{
+    flex-direction: row;
+    justify-content: center;
+    gap: 28px;
+    padding: 20px 32px;
+  }
+
+  .logo-circle{
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  .book-title{
+    font-size: 1rem;
+    text-align: left;
+    line-height: 1.7;
+  }
+
+  /* 書脊改到右側 */
+  .spine{
+    right: -7px;
+    top: 8px;
+    bottom: 8px;
+    width: 10px;
+  }
+
+  /* 書籤 */
+  .bookmark{
+    bottom: -24px;
+    width: 20px;
+    height: 38px;
+  }
+
+  /* 背面 */
+  .back{
+    padding: 24px 42px;
+  }
+
+  .back .q-text{
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    line-height: 1.7;
+  }
+
+  /* 橫式時按鈕不要太大 */
+  #drawBtn{
+    padding: 12px 32px;
+  }
+
+  .counter{
+    margin-top: 12px;
+  }
+
+  .history{
+    max-width: min(86vw, 640px);
+    margin-top: 24px;
+  }
+
+  .qcard{
+    max-width: min(86vw, 640px);
+  }
+}
+
+
+/* =========================================
+   小型手機橫式
+   ========================================= */
+
+@media screen and (orientation: landscape) and (max-width: 600px){
+
+  body{
+    padding: 10px 12px 30px;
+  }
+
+  h1{
+    font-size: 1rem;
+    margin: 4px 0;
+  }
+
+  .sub{
+    font-size: .72rem;
+    margin-bottom: 8px;
+  }
+
+  .nav{
+    margin-bottom: 10px;
+  }
+
+  .nav button{
+    padding: 6px 14px;
+    font-size: .72rem;
+  }
+
+  .book-wrap{
+    width: min(88vw, 600px);
+    margin-bottom: 14px;
+  }
+
+  .book{
+    width: min(88vw, 600px);
+    height: calc(min(88vw, 600px) * 9 / 16);
+  }
+
+  .front{
+    gap: 20px;
+    padding: 16px 24px;
+  }
+
+  .logo-circle{
+    width: 82px;
+    height: 82px;
+  }
+
+  .book-title{
+    font-size: .85rem;
+  }
+
+  .back{
+    padding: 18px 28px;
+  }
+
+  .back .q-text{
+    font-size: clamp(1.15rem, 4vw, 1.7rem);
+    line-height: 1.6;
+  }
+
+  #drawBtn{
+    padding: 10px 26px;
+    font-size: .78rem;
+  }
+
+  .counter{
+    font-size: .8rem;
+  }
+
+  .history{
+    margin-top: 14px;
+  }
+}
 </style>
 </head>
 <body>
