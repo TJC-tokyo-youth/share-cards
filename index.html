@@ -133,121 +133,29 @@ button:disabled{ opacity:.4; cursor:not-allowed; box-shadow:none; }
 }
 .qrows li .idx{ color:var(--accent-dark); font-weight:700; flex-shrink:0; }
 /* =========================================
-   手機橫式：卡片改成 16:9
+   手機橫式
+   卡片 16:9 + 按鈕同一畫面
    ========================================= */
 
 @media screen and (orientation: landscape) and (max-width: 900px){
 
-  /* 讓橫向時卡片可以利用螢幕寬度 */
-  .view{
-    max-width: none;
-    width: 100%;
-  }
-
-  .book-wrap{
-    width: min(86vw, 700px);
-    padding-bottom: 24px;
-  }
-
-  /* 16:9 橫式卡片 */
-  .book{
-    width: min(86vw, 640px);
-    height: calc(min(86vw, 640px) * 9 / 16);
-    max-height: 72vh;
-  }
-
-  .face{
-    border-radius: 18px;
-  }
-
-  /* 正面 */
-  .front{
-    flex-direction: row;
-    justify-content: center;
-    gap: 28px;
-    padding: 20px 32px;
-  }
-
-  .logo-circle{
-    width: 110px;
-    height: 110px;
-    flex-shrink: 0;
-    margin-bottom: 0;
-  }
-
-  .book-title{
-    font-size: 1rem;
-    text-align: left;
-    line-height: 1.7;
-  }
-
-  /* 書脊改到右側 */
-  .spine{
-    right: -7px;
-    top: 8px;
-    bottom: 8px;
-    width: 10px;
-  }
-
-  /* 書籤 */
-  .bookmark{
-    bottom: -24px;
-    width: 20px;
-    height: 38px;
-  }
-
-  /* 背面 */
-  .back{
-    padding: 24px 42px;
-  }
-
-  .back .q-text{
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    line-height: 1.7;
-  }
-
-  /* 橫式時按鈕不要太大 */
-  #drawBtn{
-    padding: 12px 32px;
-  }
-
-  .counter{
-    margin-top: 12px;
-  }
-
-  .history{
-    max-width: min(86vw, 640px);
-    margin-top: 24px;
-  }
-
-  .qcard{
-    max-width: min(86vw, 640px);
-  }
-}
-
-
-/* =========================================
-   小型手機橫式
-   ========================================= */
-
-@media screen and (orientation: landscape) and (max-width: 600px){
-
   body{
-    padding: 10px 12px 30px;
+    padding: 8px 16px 20px;
   }
 
   h1{
     font-size: 1rem;
-    margin: 4px 0;
+    margin: 2px 0 3px;
   }
 
   .sub{
-    font-size: .72rem;
-    margin-bottom: 8px;
+    font-size: .7rem;
+    margin-bottom: 6px;
   }
 
   .nav{
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    padding: 3px;
   }
 
   .nav button{
@@ -255,50 +163,186 @@ button:disabled{ opacity:.4; cursor:not-allowed; box-shadow:none; }
     font-size: .72rem;
   }
 
-  .book-wrap{
-    width: min(88vw, 600px);
-    margin-bottom: 14px;
+  .view{
+    max-width: 100%;
   }
+
+  /* 卡片外層 */
+  .book-wrap{
+    width: min(78vw, 560px);
+    margin-bottom: 8px;
+    padding-bottom: 0;
+  }
+
+  /* =====================================
+     16:9 卡片
+     ===================================== */
 
   .book{
-    width: min(88vw, 600px);
-    height: calc(min(88vw, 600px) * 9 / 16);
+    width: min(78vw, 560px);
+    height: calc(min(78vw, 560px) * 9 / 16);
   }
 
+  .face{
+    border-radius: 16px;
+  }
+
+  /* =====================================
+     卡片正面
+     ===================================== */
+
   .front{
+    flex-direction: row;
+    justify-content: center;
     gap: 20px;
-    padding: 16px 24px;
+    padding: 14px 28px;
   }
 
   .logo-circle{
-    width: 82px;
-    height: 82px;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    margin-bottom: 0;
   }
 
   .book-title{
-    font-size: .85rem;
+    font-size: .82rem;
+    line-height: 1.5;
+    text-align: left;
   }
 
+  /* =====================================
+     卡片背面
+     ===================================== */
+
   .back{
-    padding: 18px 28px;
+    padding: 16px 30px;
   }
 
   .back .q-text{
-    font-size: clamp(1.15rem, 4vw, 1.7rem);
-    line-height: 1.6;
+    font-size: clamp(1.1rem, 3.4vw, 1.7rem);
+    line-height: 1.55;
   }
 
+  /* =====================================
+     書籤
+     ===================================== */
+
+  .bookmark{
+    bottom: -18px;
+    width: 18px;
+    height: 34px;
+  }
+
+  /* =====================================
+     抽卡按鈕
+     ===================================== */
+
   #drawBtn{
-    padding: 10px 26px;
+    padding: 9px 28px;
     font-size: .78rem;
   }
 
   .counter{
-    font-size: .8rem;
+    margin-top: 8px;
+    font-size: .78rem;
   }
 
+  .counter b{
+    font-size: .9rem;
+  }
+
+  .dashes{
+    margin-top: 6px;
+  }
+
+  /* =====================================
+     歷史紀錄
+     ===================================== */
+
   .history{
+    max-width: min(78vw, 560px);
     margin-top: 14px;
+    padding: 12px 16px;
+  }
+
+  .history-toggle{
+    font-size: .82rem;
+  }
+}
+
+
+/* =========================================
+   更小的手機橫式
+   例如 iPhone 橫放
+   ========================================= */
+
+@media screen and (orientation: landscape) and (max-height: 500px){
+
+  body{
+    padding-top: 4px;
+    padding-bottom: 10px;
+  }
+
+  h1{
+    font-size: .9rem;
+    margin: 0;
+  }
+
+  .sub{
+    font-size: .62rem;
+    margin-bottom: 4px;
+  }
+
+  .nav{
+    margin-bottom: 5px;
+  }
+
+  .nav button{
+    padding: 4px 12px;
+    font-size: .68rem;
+  }
+
+  .book-wrap{
+    width: min(68vw, 500px);
+    margin-bottom: 5px;
+  }
+
+  .book{
+    width: min(68vw, 500px);
+    height: calc(min(68vw, 500px) * 9 / 16);
+  }
+
+  .logo-circle{
+    width: 65px;
+    height: 65px;
+  }
+
+  .book-title{
+    font-size: .72rem;
+  }
+
+  .back{
+    padding: 12px 24px;
+  }
+
+  .back .q-text{
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    line-height: 1.45;
+  }
+
+  #drawBtn{
+    padding: 7px 24px;
+    font-size: .7rem;
+  }
+
+  .counter{
+    margin-top: 5px;
+    font-size: .7rem;
+  }
+
+  .dashes{
+    margin-top: 4px;
   }
 }
 </style>
