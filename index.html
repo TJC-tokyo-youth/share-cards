@@ -52,10 +52,28 @@ h1{
 
 .book-wrap{ perspective:1400px; margin-bottom:26px; padding-bottom:32px; }
 .book{
-  position:relative; width:280px; height:360px;
+  position:relative; width:min(360px, calc(100vw - 56px)); aspect-ratio:4/3;
   transform-style:preserve-3d; transition:transform .65s cubic-bezier(.4,.1,.2,1);
 }
 .book.flipped{ transform:rotateY(180deg); }
+
+/* 縱向 */
+.book.portrait{ width:min(280px, calc(100vw - 56px)); aspect-ratio:auto; height:360px; }
+.book.portrait .front{ flex-direction:column; padding:26px 20px; gap:0; }
+.book.portrait .logo-circle{ width:118px; height:118px; margin-bottom:18px; }
+.book.portrait .book-title{ text-align:center; }
+.book.portrait .star.s1{ top:16%; left:14%; }
+.book.portrait .star.s2{ top:32%; right:12%; }
+.book.portrait .star.s3{ bottom:16%; right:16%; }
+.book.portrait .back{ padding:34px 26px; }
+
+/* 橫/縱切換 */
+.orient{ display:flex; align-items:center; gap:6px; margin-bottom:18px; color:var(--sub); font-size:.78rem; }
+.orient button{
+  padding:6px 16px; font-size:.78rem; background:transparent; color:var(--sub);
+  border:1px solid var(--border); box-shadow:none;
+}
+.orient button.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
 .face{
   position:absolute; inset:0; border-radius:20px; backface-visibility:hidden;
   box-shadow:0 10px 30px rgba(0,0,0,.18);
@@ -63,7 +81,7 @@ h1{
 }
 .front{
   background-image:linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
-  border:1px solid rgba(255,255,255,.08); padding:26px 20px;
+  border:1px solid rgba(255,255,255,.08); padding:20px 28px; flex-direction:row; gap:20px;
 }
 .front::after{
   content:""; position:absolute; inset:14px; border:1.5px dashed rgba(255,255,255,.28);
@@ -75,20 +93,20 @@ h1{
   border-radius:0 6px 6px 0; box-shadow:2px 0 6px rgba(0,0,0,.15);
 }
 .star{ position:absolute; color:rgba(255,255,255,.55); font-size:14px; }
-.star.s1{ top:16%; left:14%; } .star.s2{ top:32%; right:12%; font-size:18px;} .star.s3{ bottom:16%; right:16%; }
+.star.s1{ top:11%; left:9%; } .star.s2{ top:16%; right:13%; font-size:18px;} .star.s3{ bottom:14%; right:11%; }
 .logo-circle{
-  width:118px; height:118px; border-radius:50%; background:#fff;
-  display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+  width:112px; height:112px; border-radius:50%; background:#fff; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; margin-bottom:0;
   box-shadow:0 4px 14px rgba(0,0,0,.25); border:3px solid rgba(255,255,255,.5); overflow:hidden;
 }
 .logo-img{ width:76%; height:76%; object-fit:contain; }
-.book-title{ color:#fff; text-align:center; font-size:1rem; font-weight:700; line-height:1.6; opacity:.95; }
+.book-title{ color:#fff; text-align:left; font-size:1rem; font-weight:700; line-height:1.6; opacity:.95; }
 .bookmark{
   position:absolute; bottom:-28px; left:50%; transform:translateX(-50%);
   width:22px; height:44px; background:var(--accent);
   clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%);
 }
-.back{ background:var(--card); border:1px solid var(--border); transform:rotateY(180deg); padding:34px 26px; text-align:center; }
+.back{ background:var(--card); border:1px solid var(--border); transform:rotateY(180deg); padding:18px 22px; text-align:center; }
 .back .q-text{ font-size:1.95rem; font-weight:700; line-height:1.9; color:var(--ink); animation:fadeIn .4s ease; overflow-wrap:anywhere; max-width:100%; }
 @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
 
@@ -132,223 +150,6 @@ button:disabled{ opacity:.4; cursor:not-allowed; box-shadow:none; }
   padding:10px 12px; background:var(--bg); border-radius:10px; border:1px solid var(--border); overflow-wrap:anywhere;
 }
 .qrows li .idx{ color:var(--accent-dark); font-weight:700; flex-shrink:0; }
-/* =========================================
-   手機橫式
-   卡片 16:9 + 按鈕同一畫面
-   ========================================= */
-
-@media screen and (orientation: landscape) and (max-width: 900px){
-
-  body{
-    padding: 8px 16px 20px;
-  }
-
-  h1{
-    font-size: 1rem;
-    margin: 2px 0 3px;
-  }
-
-  .sub{
-    font-size: .7rem;
-    margin-bottom: 6px;
-  }
-
-  .nav{
-    margin-bottom: 8px;
-    padding: 3px;
-  }
-
-  .nav button{
-    padding: 6px 14px;
-    font-size: .72rem;
-  }
-
-  .view{
-    max-width: 100%;
-  }
-
-  /* 卡片外層 */
-  .book-wrap{
-    width: min(78vw, 560px);
-    margin-bottom: 8px;
-    padding-bottom: 0;
-  }
-
-  /* =====================================
-     16:9 卡片
-     ===================================== */
-
-  .book{
-    width: min(78vw, 560px);
-    height: calc(min(78vw, 560px) * 9 / 16);
-  }
-
-  .face{
-    border-radius: 16px;
-  }
-
-  /* =====================================
-     卡片正面
-     ===================================== */
-
-  .front{
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-    padding: 14px 28px;
-  }
-
-  .logo-circle{
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
-    margin-bottom: 0;
-  }
-
-  .book-title{
-    font-size: .82rem;
-    line-height: 1.5;
-    text-align: left;
-  }
-
-  /* =====================================
-     卡片背面
-     ===================================== */
-
-  .back{
-    padding: 16px 30px;
-  }
-
-  .back .q-text{
-    font-size: clamp(1.1rem, 3.4vw, 1.7rem);
-    line-height: 1.55;
-  }
-
-  /* =====================================
-     書籤
-     ===================================== */
-
-  .bookmark{
-    bottom: -18px;
-    width: 18px;
-    height: 34px;
-  }
-
-  /* =====================================
-     抽卡按鈕
-     ===================================== */
-
-  #drawBtn{
-    padding: 9px 28px;
-    font-size: .78rem;
-  }
-
-  .counter{
-    margin-top: 8px;
-    font-size: .78rem;
-  }
-
-  .counter b{
-    font-size: .9rem;
-  }
-
-  .dashes{
-    margin-top: 6px;
-  }
-
-  /* =====================================
-     歷史紀錄
-     ===================================== */
-
-  .history{
-    max-width: min(78vw, 560px);
-    margin-top: 14px;
-    padding: 12px 16px;
-  }
-
-  .history-toggle{
-    font-size: .82rem;
-  }
-}
-
-
-/* =========================================
-   更小的手機橫式
-   例如 iPhone 橫放
-   ========================================= */
-
-@media screen and (orientation: landscape) and (max-height: 500px){
-
-  body{
-    padding-top: 4px;
-    padding-bottom: 10px;
-  }
-
-  h1{
-    font-size: .9rem;
-    margin: 0;
-  }
-
-  .sub{
-    font-size: .62rem;
-    margin-bottom: 4px;
-  }
-
-  .nav{
-    margin-bottom: 5px;
-  }
-
-  .nav button{
-    padding: 4px 12px;
-    font-size: .68rem;
-  }
-
-  .book-wrap{
-    width: min(72vw, 520px);
-    margin-top: 10px;
-    margin-bottom: 16px;
-    padding-bottom: 0;
-  }
-
-  .book{
-    width: min(72vw, 520px);
-    /* 比標準 16:9 更扁一點 */
-    aspect-ratio: 2 / 0.9;
-    height: auto;
-  }
-
-  .logo-circle{
-    width: 65px;
-    height: 65px;
-  }
-
-  .book-title{
-    font-size: 1rem;
-  }
-
-  .back{
-    padding: 12px 24px;
-  }
-
-  .back .q-text{
-    font-size: clamp(1rem, 3vw, 1.4rem);
-    line-height: 1.45;
-  }
-
-  #drawBtn{
-    padding: 7px 24px;
-    font-size: .7rem;
-  }
-
-  .counter{
-    margin-top: 5px;
-    font-size: .7rem;
-  }
-
-  .dashes{
-    margin-top: 4px;
-  }
-}
 </style>
 </head>
 <body>
@@ -361,6 +162,11 @@ button:disabled{ opacity:.4; cursor:not-allowed; box-shadow:none; }
   </div>
 
   <section class="view active" id="view-home">
+    <div class="orient">
+      <span>カードの向き</span>
+      <button type="button" data-o="landscape" class="active">横</button>
+      <button type="button" data-o="portrait">縦</button>
+    </div>
     <div class="book-wrap">
       <div class="book" id="book">
         <div class="face front">
@@ -463,6 +269,18 @@ function renderList(){
   });
 }
 
+function fitText(){
+  let size = 1.95;
+  qText.style.fontSize = size + 'rem';
+  const back = qText.parentElement;
+  const cs = getComputedStyle(back);
+  const avail = back.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  while(qText.offsetHeight > avail && size > 1){
+    size -= 0.1;
+    qText.style.fontSize = size + 'rem';
+  }
+}
+
 function draw(){
   if(remaining.length === 0 || animating) return;
   animating = true;
@@ -475,6 +293,7 @@ function draw(){
     used.push(qi);
 
     qText.textContent = questions[qi];
+    fitText();
     book.classList.add('flipped');
     renderHistory();
 
@@ -508,6 +327,18 @@ function switchView(name){
 document.querySelectorAll('.nav button').forEach(b => {
   b.addEventListener('click', () => switchView(b.dataset.view));
 });
+
+const orientBtns = document.querySelectorAll('.orient button');
+function setOrientation(o, save){
+  book.classList.toggle('portrait', o === 'portrait');
+  orientBtns.forEach(b => b.classList.toggle('active', b.dataset.o === o));
+  if(save){ try{ localStorage.setItem('cardOrientation', o); }catch(e){} }
+  if(qText.textContent) fitText();
+}
+orientBtns.forEach(b => b.addEventListener('click', () => setOrientation(b.dataset.o, true)));
+let savedOrient = 'landscape';
+try{ savedOrient = localStorage.getItem('cardOrientation') || 'landscape'; }catch(e){}
+setOrientation(savedOrient, false);
 
 async function init(){
   try{
